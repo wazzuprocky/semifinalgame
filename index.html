@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="project.css">
+
+  <meta charset="UTF-8">
+  <title>Color Guessing Game</title>
+</head>
+<body>
+    <div class="wrapper">
+  <div class="container">
+    <h1>Color Guessing Game</h1>
+    <p><i>Trust Your Intuition!</i></p>
+
+    <div id="color-message"></div>
+    <div class="color-box" data-color="#f43f5e"></div>
+    <div class="color-box" data-color="#3b82f6"></div>
+    <div class="color-box" data-color="#22c55e"></div>
+  </div>
+</div>
+  <script>
+    const colorBoxes = document.querySelectorAll('.color-box');
+const colorMessage = document.getElementById('color-message');
+
+let targetColor = colorBoxes[Math.floor(Math.random() * colorBoxes.length)].dataset.color;
+
+const handleClick = (event) => {
+    const guessedColor = event.target.dataset.color;
+    if (guessedColor === targetColor) {
+        colorMessage.textContent = `Slayyyy! 💅😍`;
+        colorMessage.style.color = 'green'; 
+        colorBoxes.forEach(colorBox => colorBox.style.backgroundColor = targetColor);
+        // Set a timeout to reset the game after 2 seconds
+        setTimeout(() => {
+            targetColor = colorBoxes[Math.floor(Math.random() * colorBoxes.length)].dataset.color;
+            colorBoxes.forEach(colorBox => colorBox.style.backgroundColor = '#ccc');
+            colorMessage.textContent = '';
+        }, 2000);
+    } else {
+        colorMessage.textContent = `Naurrrr! Try again baby 😘😙 `;
+        colorMessage.style.color = 'red';
+    }
+};
+
+colorBoxes.forEach(colorBox => colorBox.addEventListener('click', handleClick));
+</script>
+
+
+
+</body>
+</html>
